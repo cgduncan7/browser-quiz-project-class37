@@ -15,3 +15,33 @@
 ul {
   list-style: none;
 }
+
+/* option container */
+.options-container {
+  display: flex;
+  border: 2px solid blue;
+  width: 100%;
+  margin: 1rem;
+}
+
+.options-container:hover {
+  cursor: pointer;
+}
+
+.correct {
+  background-color: green;
+}
+.wrong {
+  background-color: red;
+}
+
+.show-correct-answer {
+  border: 3px solid darkgreen;
+}
+
+/* Score */
+
+.score {
+  color: green;
+  font-size: 50px;
+}
