@@ -3,11 +3,13 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID,
+  USER_INTERFACE_ID, QUESTION_NUMBER
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+
+export let questionProgress = 0;
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -27,6 +29,11 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
+  const progressText = document.querySelector('#progressText');
+  const progressBarFull = document.querySelector('#progressBarFull');
+  questionProgress++;
+  progressText.innerText = `Question ${questionProgress} of ${ QUESTION_NUMBER}`
+  progressBarFull.style.width = `${(questionProgress/ QUESTION_NUMBER)*100}%`
 
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
