@@ -23,8 +23,13 @@ export const initQuestionPage = () => {
 
   for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
     const answerElement = createAnswerElement(key, answerText);
+
     answerElement.setAttribute("data-key", key);
     answerElement.addEventListener("click", chooseAnswer);
+
+    answerElement.setAttribute('data-key', key);
+    answerElement.addEventListener('click', chooseAnswer);
+
     answersListElement.appendChild(answerElement);
   }
 
@@ -72,3 +77,25 @@ const nextQuestion = () => {
 
   initQuestionPage();
 };
+
+function chooseAnswer() {
+  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  currentQuestion.selected =this.dataset.key 
+ 
+  const classApply =
+    currentQuestion.selected === currentQuestion.correct
+      ? 'correct'
+      : 'wrong';
+
+  if (currentQuestion.selected == currentQuestion.correct) {
+    this.classList.add(classApply);
+  
+  } else {
+    this.classList.add(classApply);
+    const correctAnswer = document.querySelector(
+      `li[data-key="${currentQuestion.correct}"]`
+    );
+    correctAnswer.classList.add('show-correct-answer');
+    
+  }
+}
