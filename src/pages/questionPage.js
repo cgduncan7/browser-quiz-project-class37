@@ -3,7 +3,7 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID, QUESTION_NUMBER
+  USER_INTERFACE_ID
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
@@ -17,7 +17,7 @@ export const initQuestionPage = () => {
 
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
 
-  const questionElement = createQuestionElement(currentQuestion.text);
+  const questionElement = createQuestionElement(currentQuestion.text,  quizData.questions_number, quizData.questionProgress);
 
   userInterface.appendChild(questionElement);
 
@@ -31,9 +31,9 @@ export const initQuestionPage = () => {
   }
   const progressText = document.querySelector('#progressText');
   const progressBarFull = document.querySelector('#progressBarFull');
-  questionProgress++;
-  progressText.innerText = `Question ${questionProgress} of ${ QUESTION_NUMBER}`
-  progressBarFull.style.width = `${(questionProgress/ QUESTION_NUMBER)*100}%`
+  quizData.questionProgress++
+  progressText.innerText = `Question ${quizData.questionProgress} of ${ quizData.questions_number}`
+  progressBarFull.style.width = `${(quizData.questionProgress/ quizData.questions_number)*100}%`
 
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
