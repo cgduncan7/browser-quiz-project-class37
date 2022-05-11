@@ -13,6 +13,9 @@
 
 export const quizData = {
   currentQuestionIndex: 0,
+  score: 0,
+  questions_number: 3,
+  questionProgress: 0,
   // the questions in the quiz
   questions: [
     {
@@ -57,23 +60,26 @@ export const quizData = {
         },
       ],
     },
-    // Add more questions here
     {
-      text: 'What does `NaN` mean in JS?',
+      text: 'What is the capital city of the Netherlands?',
       answers: {
-        a: 'Not a Number',
-        b: 'Definitely a Number',
-        c: 'Negative Number',
-        d: 'Normally a Number',
+        a: 'Amsterdam',
+        b: 'Groningen',
+        c: 'Leiden',
       },
       correct: 'a',
       selected: null,
       links: [
         {
-          text: 'NaN info',
-          href: 'https://www.w3schools.com/jsref/jsref_nan.asp',
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
         },
       ],
-    }
+    },
+    // Add more questions here
   ],
 };

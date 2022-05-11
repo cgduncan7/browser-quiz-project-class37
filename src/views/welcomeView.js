@@ -1,3 +1,5 @@
+
+
 'use strict';
 
 import { START_QUIZ_BUTTON_ID } from '../constants.js';
@@ -9,7 +11,13 @@ import { START_QUIZ_BUTTON_ID } from '../constants.js';
 export const createWelcomeElement = () => {
   const element = document.createElement('div');
   element.innerHTML = String.raw`
-    <h1>Welcome</h1>
+    
+<svg width="100%" height="100%"> 
+<text x="50%" y="60%"  text-anchor="middle"  >
+Welcome
+</text>
+</svg>
+
     <button id="${START_QUIZ_BUTTON_ID}">start quiz</button>
   `;
   return element;
