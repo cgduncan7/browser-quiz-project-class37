@@ -13,6 +13,7 @@
 
 export const quizData = {
   currentQuestionIndex: 0,
+  score: 0,
   // the questions in the quiz
   questions: [
     {
@@ -58,5 +59,22 @@ export const quizData = {
       ],
     },
     // Add more questions here
+    {
+      text: 'What does `NaN` mean in JS?',
+      answers: {
+        a: 'Not a Number',
+        b: 'Definitely a Number',
+        c: 'Negative Number',
+        d: 'Normally a Number',
+      },
+      correct: 'a',
+      selected: null,
+      links: [
+        {
+          text: 'NaN info',
+          href: 'https://www.w3schools.com/jsref/jsref_nan.asp',
+        },
+      ],
+    }
   ],
 };
