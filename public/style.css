@@ -1,39 +1,19 @@
-.centered {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
 
-.scrollable {
-  height: auto;
-  max-height: 80vh;
-  overflow: auto;
-}
-
-
-
-.options-container{
-  display: flex;
-  border: 2px solid blue;
-  width: 100%;
-  margin: 1rem;
-}
 
 .options-container:hover{
   cursor: pointer;
 }
 
+
 .correct {
   background-color: green;
 }
 .wrong {
-  background-color: red;
+  background-color:rgba(255, 0, 0, 0.4);
 }
 
 .show-correct-answer {
-  border: 3px solid darkgreen;
+  background-color: rgba(0,255,0,0.3);
 }
 
 #progressBar {
@@ -47,13 +27,16 @@
 
 #progressBarFull{
   height: 100%;
-  background: blue;
+  background: #f6ffa5;
   width: 0%;
+  
 }
 
 
 /*----- welcome page----- */
 #start-quiz-button{
+  display: block;
+  margin: 0 auto;
   margin-top: 2rem;
   border-radius: 5px;
   font-size: 18px ;
@@ -67,15 +50,6 @@
   padding: 1rem;
   background-color:#f6ffa5;
   color :#426084;
-}
-
-body {
-  background-color: #426084;
-  margin:0;
-}
-
-.patterns {
- height: 100vh;
 }
 
 svg text {
@@ -131,6 +105,7 @@ body {
 
 ul {
   list-style: none;
+  text-align: center;
 }
 
 ul li{
@@ -139,7 +114,9 @@ ul li{
     display: block;
     line-height: 1.6;
     font-size: 32px;
-    padding-top: 0.7rem;
+    padding: 0 0.7rem;
+    margin-top: 0.7rem;
+    
 }
 
 ul li::after{
@@ -199,13 +176,21 @@ ul li:nth-of-type(2)::after{
 h1{
   font-size: 2.7em;
   font-weight: normal;
+  text-decoration: underline;
 }
 
 
-/*----- score  part----- */
+/*----- score part----- */
+#nav-bar{
+ display:flex;
+ font-size: 18px;
+}
 .score-div{
- 
+  display: flex;
+  font-size: 18px;
+  margin-left: auto;
 }
+
 
 /*----- Links part----- */
 a{

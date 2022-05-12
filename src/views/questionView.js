@@ -1,27 +1,28 @@
 'use strict';
 
 import { ANSWERS_LIST_ID } from '../constants.js';
-import { NEXT_QUESTION_BUTTON_ID} from '../constants.js';
+import { NEXT_QUESTION_BUTTON_ID } from '../constants.js';
 import { SCORE_ID } from "../constants.js";
 /**
  * Create a full question element
  * @returns {Element}
  */
-export const createQuestionElement = (question, score, questions_number, questionProgress,links) => {
+export const createQuestionElement = (question, score, questions_number, questionProgress, links) => {
   const element = document.createElement('div');
 
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
-  <p id="progressText">
-      Question : ${ questionProgress + 1} / ${questions_number}
-    </p>
-    <div id="progressBar">
-              <div id="progressBarFull"></div>
-    </div>
+  <div id= "nav-bar">
+  <div>
+      <p id="progressText">Question : ${questionProgress + 1} / ${questions_number}</p>
+    <div id="progressBar"><div id="progressBarFull"></div></div>
+  </div>
 
     <div class="score-div">
-    <p>Score :</p>
-    <h1 id="${SCORE_ID}" class="score">${score}</h1>
+    <p>Score: </p>
+    <p id="${SCORE_ID}" class="score"> ${score}</p>
+   </div>
+
   </div>
 
     <h1 class="Question-Text"><span>${question}</span></h1>
@@ -33,7 +34,8 @@ export const createQuestionElement = (question, score, questions_number, questio
       Next question
     </button>
 
-<div>
+
+<p>Need help? check this hint </p>
 <a href=${links[0].href}>${links[0].text}</a>
 <a href=${links[1].href}>${links[1].text}</a>
 
