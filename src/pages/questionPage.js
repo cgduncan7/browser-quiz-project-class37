@@ -8,6 +8,7 @@ import {
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+import { COUNTING } from "../constants.js";
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -15,7 +16,7 @@ export const initQuestionPage = () => {
 
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
 
-  const questionElement = createQuestionElement(currentQuestion.text, quizData.score);
+  const questionElement = createQuestionElement(currentQuestion.text, quizData.score, quizData.timeCounter);
 
   userInterface.appendChild(questionElement);
 
@@ -67,6 +68,28 @@ function chooseAnswer() {
 const incrementScore = (point) => {
   quizData.score += point;
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
+};
+
+// countDown Function
+export const countDownFun = () => {
+  // Add a Countdown for the quiz
+  let time = 2;
+  let quizTimeInMin = time * 60 * 60;
+  let quizTime = quizTimeInMin / 60;
+
+  let quizTimerInterVal = setInterval(() => {
+    if (quizTime <= 0) {
+      clearInterval(quizTimerInterVal);
+    } else {
+      quizTime--;
+      let sec = Math.floor(quizTime % 60);
+      sec = sec < 10 ? "0" + sec : sec;
+      let min = Math.floor(quizTime / 60) % 60;
+      min  = min < 10 ?  "0" + min : min;
+      quizData.timeCounter = `TIME: ${min}:${sec}`;
+      document.getElementById(COUNTING).innerText = quizData.timeCounter;
+    }
+  }, 1000);
 };
 
 const nextQuestion = () => {
