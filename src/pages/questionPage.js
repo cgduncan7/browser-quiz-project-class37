@@ -3,21 +3,21 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID, SCORE_ID, CORRECT_ANSWER_POINT
+  USER_INTERFACE_ID,
+  SCORE_DIV_ID,
+  CORRECT_ANSWER_POINT,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
-
-
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-
-  const questionElement = createQuestionElement(currentQuestion.text, quizData.score, quizData.questions_number, quizData.questionProgress);
+  
+  const questionElement = createQuestionElement(currentQuestion.text, quizData.score);
 
   userInterface.appendChild(questionElement);
 
@@ -29,18 +29,17 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
-
+  
   const progressText = document.querySelector('#progressText');
   const progressBarFull = document.querySelector('#progressBarFull');
-  quizData.questionProgress++
-  progressText.innerText = `Question ${quizData.questionProgress} of ${ quizData.questions_number}`
-  progressBarFull.style.width = `${(quizData.questionProgress/ quizData.questions_number)*100}%`
-
+  const incrementQuestionBar = quizData.currentQuestionIndex + 1
+  progressText.innerText = `Question ${incrementQuestionBar} of ${ quizData.questions.length}`
+  progressBarFull.style.width = `${(incrementQuestionBar/ quizData.questions.length)*100}%`
+  
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', nextQuestion);
 };
-
 
 function chooseAnswer() {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
@@ -52,8 +51,8 @@ function chooseAnswer() {
       : 'wrong';
 
   if (classApply === "correct") {
-        incrementScoreFun(CORRECT_ANSWER_POINT);
-      }
+    incrementScore(CORRECT_ANSWER_POINT);
+  }
 
   if (currentQuestion.selected == currentQuestion.correct) {
     this.classList.add(classApply);
@@ -73,9 +72,9 @@ function chooseAnswer() {
 }
 
 // increment
-const incrementScoreFun = (point) => {
+const incrementScore = (point) => {
   quizData.score += point;
-  document.getElementById(SCORE_ID).innerText = quizData.score;
+  document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
 };
 
 const nextQuestion = () => {
