@@ -18,7 +18,7 @@ Welcome
 </text>
 </svg>
 
-    <button id="${START_QUIZ_BUTTON_ID}">start quiz</button>
+    <button id="${START_QUIZ_BUTTON_ID}">Start Quiz</button>
   `;
   return element;
 };

@@ -12,9 +12,7 @@
   overflow: auto;
 }
 
-ul {
-  list-style: none;
-}
+
 
 .options-container{
   display: flex;
@@ -56,8 +54,17 @@ ul {
 
 /*----- welcome page----- */
 #start-quiz-button{
-  padding:12px 16px;
-  border-radius: 15px;
+  margin-top: 2rem;
+  border-radius: 5px;
+  font-size: 18px ;
+  padding: 0.7rem;
+  background-color:#f6ffa5;
+  color :#426084;
+}
+#start-quiz-button:hover{
+  border-radius: 5px;
+  font-size: 18px ;
+  padding: 1rem;
   background-color:#f6ffa5;
   color :#426084;
 }
@@ -99,7 +106,7 @@ svg text {
  
 }
 
-/*----- Question part----- */
+/* Answers styles */
 *,
 *::before,
 *::after {
@@ -122,20 +129,20 @@ body {
   font-family: 'Maitree', serif;
 }
 
-h1{
-    font-size: 2.7em;
-    font-weight: normal;
+ul {
+  list-style: none;
 }
 
-/* title styles */
-.Question-Text span{
+ul li{
     position: relative;
     overflow: hidden;
     display: block;
-    line-height: 1.2;
+    line-height: 1.6;
+    font-size: 32px;
+    padding-top: 0.7rem;
 }
 
-.Question-Text span::after{
+ul li::after{
     content: '';
     position: absolute;
     top: 0;
@@ -147,7 +154,7 @@ h1{
     transform: translateX(-101%);
 }
 
-.Question-Text span::before{
+ul li::before{
     content: '';
     position: absolute;
     top: 0;
@@ -159,13 +166,13 @@ h1{
     transform: translateX(0);
 }
 
-.Question-Text span:nth-of-type(1)::before,
-.Question-Text span:nth-of-type(1)::after{
+ul li:nth-of-type(1)::before,
+ul li:nth-of-type(1)::after{
     animation-delay: 1s;
 }
 
-.Question-Text span:nth-of-type(2)::before,
-.Question-Text span:nth-of-type(2)::after{
+ul li:nth-of-type(2)::before,
+ul li:nth-of-type(2)::after{
     animation-delay: 1.5s;
 }
 
@@ -180,21 +187,37 @@ h1{
 }
 
 #next-question-button{
-  padding:12px 16px;
-  border-radius: 15px;
+  border-radius: 5px;
+  font-size: 18px ;
+  padding: 0.7rem;
   background-color:#f6ffa5;
   color :#426084;
   float: right;
 }
 
-/*----- Answer part----- */
-#answers-list{
-color: black;
-font-size: 32px;
-padding-top: 1rem;
+/*----- Question part----- */
+h1{
+  font-size: 2.7em;
+  font-weight: normal;
 }
+
 
 /*----- score  part----- */
 .score-div{
  
+}
+
+/*----- Links part----- */
+a{
+  border:solid 3px #f6ffa5 ;
+  color:#f6ffa5 ;
+  font-size: 18px ;
+  padding: 0.7rem;
+  margin:2rem;
+  border-radius: 5px;
+}
+a:hover {
+  background-color:#f6ffa5;
+  color :#426084;
+  padding:1rem;
 }

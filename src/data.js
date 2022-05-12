@@ -44,7 +44,6 @@ export const quizData = {
         a: 'changes the type of a primitive value',
         b: 'returns a string describing the type of a value',
         c: 'determines if a value is primitive',
-        d: 'can tell the difference between arrays and objects',
       },
       correct: 'b',
       selected: null,

@@ -7,7 +7,7 @@ import { SCORE_ID } from "../constants.js";
  * Create a full question element
  * @returns {Element}
  */
-export const createQuestionElement = (question, score, questions_number, questionProgress) => {
+export const createQuestionElement = (question, score, questions_number, questionProgress,links) => {
   const element = document.createElement('div');
 
   // I use String.raw just to get fancy colors for the HTML in VS Code.
@@ -32,6 +32,13 @@ export const createQuestionElement = (question, score, questions_number, questio
     <button id="${NEXT_QUESTION_BUTTON_ID}">
       Next question
     </button>
+
+<div>
+<a href=${links[0].href}>${links[0].text}</a>
+<a href=${links[1].href}>${links[1].text}</a>
+
+</div>
+
   `;
 
   return element;
