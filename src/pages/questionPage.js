@@ -3,11 +3,12 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID, SCORE_DIV_ID, CORRECT_ANSWER_POINT
+  USER_INTERFACE_ID, SCORE_DIV_ID, CORRECT_ANSWER_POINT, SHOW_RESULT_ID
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+import { resultPageFun } from "./resultPage.js";
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -28,9 +29,6 @@ export const initQuestionPage = () => {
     answersListElement.appendChild(answerElement);
   }
 
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
 };
 
 function chooseAnswer() {
@@ -61,16 +59,38 @@ function chooseAnswer() {
   answerElements.forEach((element) => {
     element.removeEventListener("click", chooseAnswer);
   });
+
+  document
+  .getElementById(NEXT_QUESTION_BUTTON_ID)
+  .addEventListener('click', nextQuestion);
 }
 
 // increment
 const incrementScore = (point) => {
   quizData.score += point;
+  // for local storage
+  if (quizData.score) {
+    const allScore = quizData.score;
+    localStorage.setItem("score", allScore); // setItem(key, value)
+  }
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
 };
 
 const nextQuestion = () => {
-  quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+  if (quizData.currentQuestionIndex === quizData.questions.length - 1) {
+    document.getElementById(NEXT_QUESTION_BUTTON_ID).style.display = "none";
+    document.getElementById(SHOW_RESULT_ID).style.display = "block";
+    document
+      .getElementById(SHOW_RESULT_ID)
+      .addEventListener("click", goToResultFun);
+  } else {
+    quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+    initQuestionPage();
+  }
+};
 
-  initQuestionPage();
+// go to result page function
+const goToResultFun = () => {
+  clearInterval(quizData.timer);
+  resultPageFun();
 };
