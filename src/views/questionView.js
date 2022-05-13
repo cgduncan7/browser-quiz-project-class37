@@ -13,15 +13,18 @@ import { quizData } from '../data.js';
  */
 export const createQuestionElement = (question, score) => {
   const element = document.createElement('div');
+  const incrementQuestionBar = quizData.currentQuestionIndex + 1
+  const progressBarFullStyle = `${(incrementQuestionBar / quizData.questions.length)*100}%`
 
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
   <p id="progressText">
-      Question : ${ quizData.currentQuestionIndex + 1} / ${quizData.questions.length}
-  </p>
-  <div id="progressBar">
-      <div id="progressBarFull"></div>
-  </div>
+  Question : ${incrementQuestionBar} of ${quizData.questions.length}
+</p>
+<div id="progressBar">
+<div id="progressBarFull" style= "background-color: blue; width:${progressBarFullStyle}"> 
+    </div>
+</div>
 
   <h1>${question}</h1>
 

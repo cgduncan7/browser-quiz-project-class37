@@ -30,11 +30,6 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
-  const progressText = document.querySelector('#progressText');
-  const progressBarFull = document.querySelector('#progressBarFull');
-  const incrementQuestionBar = quizData.currentQuestionIndex + 1
-  progressText.innerText = `Question ${incrementQuestionBar} of ${ quizData.questions.length}`
-  progressBarFull.style.width = `${(incrementQuestionBar/ quizData.questions.length)*100}%`
   
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
