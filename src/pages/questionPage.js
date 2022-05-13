@@ -3,11 +3,14 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID, SCORE_DIV_ID, CORRECT_ANSWER_POINT
+  USER_INTERFACE_ID
+  SCORE_DIV_ID,
+  CORRECT_ANSWER_POINT,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -27,6 +30,12 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
+
+  const progressText = document.querySelector('#progressText');
+  const progressBarFull = document.querySelector('#progressBarFull');
+  const incrementQuestionBar = quizData.currentQuestionIndex + 1
+  progressText.innerText = `Question ${incrementQuestionBar} of ${ quizData.questions.length}`
+  progressBarFull.style.width = `${(incrementQuestionBar/ quizData.questions.length)*100}%`
 };
 
 function chooseAnswer() {
