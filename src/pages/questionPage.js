@@ -3,12 +3,15 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID, SCORE_DIV_ID, CORRECT_ANSWER_POINT
+  USER_INTERFACE_ID,
+  SCORE_DIV_ID,
+  CORRECT_ANSWER_POINT,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { COUNTING } from "../constants.js";
+
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -28,10 +31,6 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
-
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
 };
 
 function chooseAnswer() {
@@ -62,6 +61,11 @@ function chooseAnswer() {
   answerElements.forEach((element) => {
     element.removeEventListener("click", chooseAnswer);
   });
+
+  // EventLister for the next button
+  document
+    .getElementById(NEXT_QUESTION_BUTTON_ID)
+    .addEventListener('click', nextQuestion);
 }
 
 // increment
@@ -92,6 +96,7 @@ export const countDownFun = () => {
   }, 1000);
 };
 
+// EventLister Function that executed to the next Question
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
 
