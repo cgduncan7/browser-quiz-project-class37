@@ -31,7 +31,7 @@ export const quizData = {
           href: 'https://javascript.info/variables',
         },
         {
-          text: 'Tyler McGinnis',
+          text: 'www.ui.div',
           href: 'https://ui.dev/var-let-const/',
         },
       ],
@@ -72,7 +72,7 @@ export const quizData = {
           href: 'https://javascript.info/variables',
         },
         {
-          text: 'Tyler McGinnis',
+          text: 'www.ui.div',
           href: 'https://ui.dev/var-let-const/',
         },
       ],

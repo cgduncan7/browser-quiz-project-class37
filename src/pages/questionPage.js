@@ -3,7 +3,7 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID
+  USER_INTERFACE_ID, //
   SCORE_DIV_ID,
   CORRECT_ANSWER_POINT,
 } from '../constants.js';
@@ -18,7 +18,7 @@ export const initQuestionPage = () => {
 
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
 
-  const questionElement = createQuestionElement(currentQuestion.text, quizData.score);
+  const questionElement = createQuestionElement(currentQuestion.text, quizData.score,currentQuestion.links);
 
   userInterface.appendChild(questionElement);
 
@@ -39,46 +39,6 @@ export const initQuestionPage = () => {
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', nextQuestion);
-
-
-    
-};
-
-
-function chooseAnswer() {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  currentQuestion.selected =this.dataset.key 
- 
-  const classApply =
-    currentQuestion.selected === currentQuestion.correct
-      ? 'correct'
-      : 'wrong';
-
-  if (classApply === "correct") {
-        incrementScoreFun(CORRECT_ANSWER_POINT);
-      }
-
-  if (currentQuestion.selected == currentQuestion.correct) {
-    this.classList.add(classApply);
-  
-  } else {
-    this.classList.add(classApply);
-    const correctAnswer = document.querySelector(
-      `li[data-key="${currentQuestion.correct}"]`
-    );
-    correctAnswer.classList.add('show-correct-answer');
-  }
-
-  const answerElements = document.querySelectorAll("li");
-  answerElements.forEach((element) => {
-    element.removeEventListener("click", chooseAnswer);
-  });
-}
-
-// increment
-const incrementScoreFun = (point) => {
-  quizData.score += point;
-  document.getElementById(SCORE_ID).innerText = quizData.score;
 };
 
 function chooseAnswer() {
