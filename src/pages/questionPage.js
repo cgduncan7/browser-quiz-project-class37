@@ -30,10 +30,6 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
-  
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
 };
 
 function chooseAnswer() {
@@ -64,6 +60,11 @@ function chooseAnswer() {
   answerElements.forEach((element) => {
     element.removeEventListener("click", chooseAnswer);
   });
+
+  // EventLister for the next button
+  document
+    .getElementById(NEXT_QUESTION_BUTTON_ID)
+    .addEventListener('click', nextQuestion);
 }
 
 // increment
@@ -72,6 +73,7 @@ const incrementScore = (point) => {
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
 };
 
+// EventLister Function that executed to the next Question
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
 
