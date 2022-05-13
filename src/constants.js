@@ -7,11 +7,13 @@
  It is an industry standard to make these variables fully capitalised
 */
 
-export const USER_INTERFACE_ID = "user-interface";
-export const START_QUIZ_BUTTON_ID = "start-quiz-button";
-export const ANSWERS_LIST_ID = "answers-list";
-export const NEXT_QUESTION_BUTTON_ID = "next-question-button";
+export const USER_INTERFACE_ID = 'user-interface';
+export const START_QUIZ_BUTTON_ID = 'start-quiz-button';
+export const ANSWERS_LIST_ID = 'answers-list';
+export const NEXT_QUESTION_BUTTON_ID = 'next-question-button';
 
 // Score Id
-export const SCORE_ID = "score-id";
+export const SCORE_DIV_ID = "score-id";
+
+// Score point
 export let CORRECT_ANSWER_POINT = 10;
