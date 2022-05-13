@@ -26,8 +26,6 @@ export const createQuestionElement = (question, score) => {
     </div>
 </div>
 
-  <h1>${question}</h1>
-
     <div>
       <p>Score</p>
       <h1 id="${SCORE_DIV_ID}" class="score">${score}</h1>
