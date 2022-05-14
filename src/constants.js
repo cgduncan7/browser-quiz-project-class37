@@ -15,8 +15,10 @@ export const NEXT_QUESTION_BUTTON_ID = 'next-question-button';
 // Score Id
 export const SCORE_DIV_ID = "score-id";
 
-// save Score
-export const SAVE_SCORE_ID = "save-score";
 
-// show result
-export const SHOW_RESULT_ID = "show-result";
+// Score point
+export let CORRECT_ANSWER_POINT = 10;
+
+// count-down
+export const COUNTING = "count-down";
+
