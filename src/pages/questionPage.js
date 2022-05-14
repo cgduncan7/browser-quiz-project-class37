@@ -11,7 +11,8 @@ import {
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
-// import { links } from 'express/lib/response';
+import { COUNTING } from "../constants.js";
+
 
 
 export const initQuestionPage = () => {
@@ -20,8 +21,8 @@ export const initQuestionPage = () => {
 
   const currentQuestion = getCurrentIndex();
 
+  const questionElement = createQuestionElement(currentQuestion.text, quizData.score, quizData.timeCounter);
 
-  const questionElement = createQuestionElement(currentQuestion.text, quizData.score);
 
 
 
@@ -87,6 +88,8 @@ const incrementScore = (point) => {
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
 };
 
+
+// EventLister Function that executed to the next Question
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   initQuestionPage();
