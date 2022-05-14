@@ -3,6 +3,7 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
+  SHOW_ANSWER_BUTTON_ID,
   USER_INTERFACE_ID,
   SCORE_DIV_ID,
   CORRECT_ANSWER_POINT,
@@ -16,7 +17,7 @@ export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const currentQuestion = getCurrentIndex();
 
   const questionElement = createQuestionElement(currentQuestion.text, quizData.score,currentQuestion.links);
 
@@ -30,11 +31,23 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
+
+  document
+  .getElementById(SHOW_ANSWER_BUTTON_ID)
+  .addEventListener('click', showAnswer);
+  
+  document
+  .getElementById(SHOW_ANSWER_BUTTON_ID)
+  .addEventListener('click', removeEventAll);
+
+  document
+  .getElementById(NEXT_QUESTION_BUTTON_ID)
+  .addEventListener('click', nextQuestion);
 };
 
 function chooseAnswer() {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  currentQuestion.selected =this.dataset.key 
+  const currentQuestion = getCurrentIndex();
+  currentQuestion.selected = this.dataset.key 
  
   const classApply =
     currentQuestion.selected === currentQuestion.correct
@@ -42,29 +55,19 @@ function chooseAnswer() {
       : 'wrong';
 
   if (classApply === "correct") {
-    incrementScore(CORRECT_ANSWER_POINT);
-  }
+        incrementScore(CORRECT_ANSWER_POINT);
+      }
 
   if (currentQuestion.selected == currentQuestion.correct) {
     this.classList.add(classApply);
+    document.getElementById(SHOW_ANSWER_BUTTON_ID).removeEventListener('click', showAnswer);
   
   } else {
     this.classList.add(classApply);
-    const correctAnswer = document.querySelector(
-      `li[data-key="${currentQuestion.correct}"]`
-    );
-    correctAnswer.classList.add('show-correct-answer');
+    getCorrect();
   }
-  
-  const answerElements = document.querySelectorAll("li");
-  answerElements.forEach((element) => {
-    element.removeEventListener("click", chooseAnswer);
-  });
 
-  // EventLister for the next button
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
+ removeEventAll()
 }
 
 // increment
@@ -73,9 +76,28 @@ const incrementScore = (point) => {
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
 };
 
-// EventLister Function that executed to the next Question
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-
   initQuestionPage();
 };
+
+
+const showAnswer = () => {
+  const correctAnswer = getCorrect()
+    correctAnswer.classList.add('show-correct-answer');
+  }
+const getCurrentIndex =() =>{
+  return quizData.questions[quizData.currentQuestionIndex];
+}
+
+const getCorrect = () =>{
+  return  document.querySelector(
+      `li[data-key="${getCurrentIndex().correct}"]`);
+}
+
+const removeEventAll = () =>{
+  const answerElements = document.querySelectorAll("li");
+  answerElements.forEach((element) => {
+  element.removeEventListener("click", chooseAnswer);
+  });
+}

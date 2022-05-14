@@ -3,7 +3,7 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  SCORE_DIV_ID,
+  SCORE_DIV_ID, SHOW_ANSWER_BUTTON_ID
 } from '../constants.js';
 import { quizData } from '../data.js';
 
@@ -18,6 +18,7 @@ export const createQuestionElement = (question, score, links) => {
 
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
+
 
   <section id= "nav-bar">
 
@@ -38,7 +39,13 @@ export const createQuestionElement = (question, score, links) => {
 
     <ul id="${ANSWERS_LIST_ID}">
     </ul>
+
 </section>
+
+
+    <button id="${SHOW_ANSWER_BUTTON_ID}">
+    Show Answer
+  </button>
 
     <button id="${NEXT_QUESTION_BUTTON_ID}">
       Next question
