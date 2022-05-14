@@ -33,7 +33,7 @@ export const quizData = {
           href: 'https://javascript.info/variables',
         },
         {
-          text: 'Tyler McGinnis',
+          text: 'www.ui.div',
           href: 'https://ui.dev/var-let-const/',
         },
       ],
@@ -44,7 +44,6 @@ export const quizData = {
         a: 'changes the type of a primitive value',
         b: 'returns a string describing the type of a value',
         c: 'determines if a value is primitive',
-        d: 'can tell the difference between arrays and objects',
       },
       correct: 'b',
       selected: null,
@@ -60,23 +59,26 @@ export const quizData = {
         },
       ],
     },
-    // Add more questions here
     {
-      text: 'What does `NaN` mean in JS?',
+      text: 'What is the capital city of the Netherlands?',
       answers: {
-        a: 'Not a Number',
-        b: 'Definitely a Number',
-        c: 'Negative Number',
-        d: 'Normally a Number',
+        a: 'Amsterdam',
+        b: 'Groningen',
+        c: 'Leiden',
       },
       correct: 'a',
       selected: null,
       links: [
         {
-          text: 'NaN info',
-          href: 'https://www.w3schools.com/jsref/jsref_nan.asp',
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'www.ui.div',
+          href: 'https://ui.dev/var-let-const/',
         },
       ],
-    }
+    },
+    // Add more questions here
   ],
 };
