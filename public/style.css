@@ -33,11 +33,3 @@ ul {
 .wrong {
   background-color: red;
 }
-
-.show-correct-answer {
-  border: 3px solid darkgreen;
-}
-
-.show-result{
-  display: none;
-}

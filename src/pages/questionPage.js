@@ -10,11 +10,12 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { resultPageFun } from "./resultPage.js";
 
+
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const currentQuestion = getCurrentIndex();
 
   const questionElement = createQuestionElement(currentQuestion.text, quizData.score);
 
@@ -28,12 +29,11 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
-
 };
 
 function chooseAnswer() {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  currentQuestion.selected =this.dataset.key 
+  const currentQuestion = getCurrentIndex();
+  currentQuestion.selected = this.dataset.key 
  
   const classApply =
     currentQuestion.selected === currentQuestion.correct
@@ -41,28 +41,17 @@ function chooseAnswer() {
       : 'wrong';
 
   if (classApply === "correct") {
-    incrementScore(CORRECT_ANSWER_POINT);
-  }
+        incrementScore(CORRECT_ANSWER_POINT);
+      }
 
   if (currentQuestion.selected == currentQuestion.correct) {
     this.classList.add(classApply);
+    document.getElementById(SHOW_ANSWER_BUTTON_ID).removeEventListener('click', showAnswer);
   
   } else {
     this.classList.add(classApply);
-    const correctAnswer = document.querySelector(
-      `li[data-key="${currentQuestion.correct}"]`
-    );
-    correctAnswer.classList.add('show-correct-answer');
+    getCorrect();
   }
-  
-  const answerElements = document.querySelectorAll("li");
-  answerElements.forEach((element) => {
-    element.removeEventListener("click", chooseAnswer);
-  });
-
-  document
-  .getElementById(NEXT_QUESTION_BUTTON_ID)
-  .addEventListener('click', nextQuestion);
 }
 
 // increment
@@ -74,23 +63,4 @@ const incrementScore = (point) => {
     localStorage.setItem("score", allScore); // setItem(key, value)
   }
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
-};
-
-const nextQuestion = () => {
-  if (quizData.currentQuestionIndex === quizData.questions.length - 1) {
-    document.getElementById(NEXT_QUESTION_BUTTON_ID).style.display = "none";
-    document.getElementById(SHOW_RESULT_ID).style.display = "block";
-    document
-      .getElementById(SHOW_RESULT_ID)
-      .addEventListener("click", goToResultFun);
-  } else {
-    quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-    initQuestionPage();
-  }
-};
-
-// go to result page function
-const goToResultFun = () => {
-  clearInterval(quizData.timer);
-  resultPageFun();
 };
