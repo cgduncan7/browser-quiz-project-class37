@@ -11,6 +11,7 @@ import {
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+// import { links } from 'express/lib/response';
 
 
 export const initQuestionPage = () => {
@@ -19,7 +20,10 @@ export const initQuestionPage = () => {
 
   const currentQuestion = getCurrentIndex();
 
-  const questionElement = createQuestionElement(currentQuestion.text, quizData.score,currentQuestion.links);
+
+  const questionElement = createQuestionElement(currentQuestion.text, quizData.score);
+
+
 
   userInterface.appendChild(questionElement);
 
@@ -33,41 +37,48 @@ export const initQuestionPage = () => {
   }
 
   document
-  .getElementById(SHOW_ANSWER_BUTTON_ID)
-  .addEventListener('click', showAnswer);
-  
-  document
-  .getElementById(SHOW_ANSWER_BUTTON_ID)
-  .addEventListener('click', removeEventAll);
+    .getElementById(SHOW_ANSWER_BUTTON_ID)
+    .addEventListener('click', showAnswer);
 
   document
-  .getElementById(NEXT_QUESTION_BUTTON_ID)
-  .addEventListener('click', nextQuestion);
+    .getElementById(SHOW_ANSWER_BUTTON_ID)
+    .addEventListener('click', removeEventAll);
+
+  document
+    .getElementById(NEXT_QUESTION_BUTTON_ID)
+    .addEventListener('click', nextQuestion);
+  currentQuestion.links.map(links => {
+    const hints = document.createElement("a");
+    hints.innerHTML = links.text;
+    hints.href = links.href;
+    document.getElementById("hints-section").appendChild(hints);
+  })
+
 };
 
 function chooseAnswer() {
   const currentQuestion = getCurrentIndex();
-  currentQuestion.selected = this.dataset.key 
- 
+  currentQuestion.selected = this.dataset.key
+
   const classApply =
     currentQuestion.selected === currentQuestion.correct
       ? 'correct'
       : 'wrong';
 
   if (classApply === "correct") {
-        incrementScore(CORRECT_ANSWER_POINT);
-      }
+    incrementScore(CORRECT_ANSWER_POINT);
+  }
 
   if (currentQuestion.selected == currentQuestion.correct) {
     this.classList.add(classApply);
     document.getElementById(SHOW_ANSWER_BUTTON_ID).removeEventListener('click', showAnswer);
-  
+
   } else {
     this.classList.add(classApply);
     getCorrect();
   }
 
- removeEventAll()
+  removeEventAll()
 }
 
 // increment
@@ -84,20 +95,20 @@ const nextQuestion = () => {
 
 const showAnswer = () => {
   const correctAnswer = getCorrect()
-    correctAnswer.classList.add('show-correct-answer');
-  }
-const getCurrentIndex =() =>{
+  correctAnswer.classList.add('show-correct-answer');
+}
+const getCurrentIndex = () => {
   return quizData.questions[quizData.currentQuestionIndex];
 }
 
-const getCorrect = () =>{
-  return  document.querySelector(
-      `li[data-key="${getCurrentIndex().correct}"]`);
+const getCorrect = () => {
+  return document.querySelector(
+    `li[data-key="${getCurrentIndex().correct}"]`);
 }
 
-const removeEventAll = () =>{
+const removeEventAll = () => {
   const answerElements = document.querySelectorAll("li");
   answerElements.forEach((element) => {
-  element.removeEventListener("click", chooseAnswer);
+    element.removeEventListener("click", chooseAnswer);
   });
 }

@@ -11,7 +11,7 @@ import { quizData } from '../data.js';
  * Create a full question element
  * @returns {Element}
  */
-export const createQuestionElement = (question, score, links) => {
+export const createQuestionElement = (question, score) => {
   const element = document.createElement('div');
   const incrementQuestionBar = quizData.currentQuestionIndex + 1
   const progressBarFullStyle = `${(incrementQuestionBar / quizData.questions.length)*100}%`
@@ -53,9 +53,7 @@ export const createQuestionElement = (question, score, links) => {
 
 <section id="hints-section">
     <h4>Need help? check these hints </h4>
-     <a href=${links[0].href}>${links[0].text}</a>
-   <a href=${links[1].href}>${links[1].text}</a>
-   </section>
+     </section>
   `;
 
   return element;
