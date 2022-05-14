@@ -129,6 +129,16 @@ ul li:hover{
   background-color:#f6ffa5;
   color :black;
 }
+#show-answer-button{
+  position: absolute;
+  bottom: 30px;
+  right: 320px;
+  border-radius: 5px;
+  font-size: 18px ;
+  padding: 0.9rem;
+  background-color:#f6ffa5;
+  color :black;
+}
 
 /*----- Question part----- */
 h1{
