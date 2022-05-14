@@ -3,16 +3,13 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  SHOW_ANSWER_BUTTON_ID,
-  USER_INTERFACE_ID,
-  SCORE_DIV_ID,
-  CORRECT_ANSWER_POINT,
+  USER_INTERFACE_ID, SCORE_DIV_ID, CORRECT_ANSWER_POINT, SHOW_RESULT_ID
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+import { resultPageFun } from "./resultPage.js";
 import { COUNTING } from "../constants.js";
-
 
 
 export const initQuestionPage = () => {
@@ -37,6 +34,7 @@ export const initQuestionPage = () => {
     answersListElement.appendChild(answerElement);
   }
 
+
   document
     .getElementById(SHOW_ANSWER_BUTTON_ID)
     .addEventListener('click', showAnswer);
@@ -54,7 +52,6 @@ export const initQuestionPage = () => {
     hints.href = links.href;
     document.getElementById("hints-section").appendChild(hints);
   })
-
 };
 
 function chooseAnswer() {
@@ -78,18 +75,24 @@ function chooseAnswer() {
     this.classList.add(classApply);
     getCorrect();
   }
-
   removeEventAll()
+
 }
 
 // increment
 const incrementScore = (point) => {
   quizData.score += point;
+  // for local storage
+  if (quizData.score) {
+    const allScore = quizData.score;
+    localStorage.setItem("score", allScore); // setItem(key, value)
+  }
   document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
 };
 
 
 // EventLister Function that executed to the next Question
+
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   initQuestionPage();
@@ -115,3 +118,4 @@ const removeEventAll = () => {
     element.removeEventListener("click", chooseAnswer);
   });
 }
+
