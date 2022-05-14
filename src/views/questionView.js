@@ -3,7 +3,6 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  SCORE_DIV_ID, SHOW_ANSWER_BUTTON_ID
 } from '../constants.js';
 import { quizData } from '../data.js';
 
@@ -11,7 +10,7 @@ import { quizData } from '../data.js';
  * Create a full question element
  * @returns {Element}
  */
-export const createQuestionElement = (question, score) => {
+export const createQuestionElement = (question, score, timeCounter) => {
   const element = document.createElement('div');
   const incrementQuestionBar = quizData.currentQuestionIndex + 1
   const progressBarFullStyle = `${(incrementQuestionBar / quizData.questions.length)*100}%`
@@ -32,9 +31,15 @@ export const createQuestionElement = (question, score) => {
 
     </div>
 
+
+    <div>
+      <p id="${COUNTING}">${timeCounter}</p>
+    </div>
+
  </section>
  
  <section id="main-part">
+
     <h1>${question}</h1>
 
     <ul id="${ANSWERS_LIST_ID}">
