@@ -22,7 +22,6 @@ export const showResultPage = () => {
 };
 
 const backToHomePage = () => {
-    localStorage.clear();
     location.reload();
     initWelcomePage();
   };
