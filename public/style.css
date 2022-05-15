@@ -1,11 +1,10 @@
 
-
 :root{
   margin-top: -4.4rem;
   margin-right: -8rem;
   background-image: url("https://t3.ftcdn.net/jpg/02/53/98/62/360_F_253986268_I3wMfXKQvcjNVcRSLDTMfKtkvbmpAj1J.jpg");
   background-size: cover;
- background-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
 body {
   display: flex;
@@ -22,7 +21,6 @@ body {
 .options-container:hover{
   cursor: pointer;
 }
-
 
 .correct {
   background-color: rgba(0,255,0,0.3);
@@ -52,35 +50,28 @@ body {
   
 }
 
-
 /*----- welcome page----- */
 #start-quiz-button{
   display: block;
   margin: 9rem auto;
   border-radius: 5px;
   font-size: 18px ;
-  padding: 1.7rem;
+  padding: 1rem;
   background-color:#f6ffa5;
   color :black;
 }
 #start-quiz-button:hover{
-  border-radius: 5px;
-  font-size: 18px ;
-  padding: 1rem;
+  cursor: pointer;
   background-color:#f6ffa5;
   color :#426084;
-  
 }
 svg text {
- font-family: Lora;
  letter-spacing: 10px;
  stroke: #f6ffa5;
- font-size: 130px;
- font-weight: 650;
+ font-size: 60px;
+ font-weight: 60;
  stroke-width: 3;
-
  animation: textAnimate 5s infinite alternate;
-
 }
 
 @keyframes textAnimate {
@@ -88,7 +79,6 @@ svg text {
    stroke-dasharray: 0 50%;
    stroke-dashoffset:  20%;
    fill:hsl(189, 68%, 75%)
-
  }
  
  100% {
@@ -111,14 +101,12 @@ ul li{
     font-size: 32px;
     padding: 0 1.7rem;
     margin-top: 1.3rem;
+    list-style: none;
     
 }
 ul li:hover{
-  background-color: snow;
-  color: black;
   border:solid 4px #f6ffa5
 }
-
 
 #next-question-button{
   position: absolute;
@@ -130,6 +118,12 @@ ul li:hover{
   background-color:#f6ffa5;
   color :black;
 }
+#next-question-button:hover, #show-answer-button:hover{
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: transform 100ms;
+}
+
 #show-answer-button{
   position: absolute;
   bottom: 30px;
@@ -141,11 +135,12 @@ ul li:hover{
   color :black;
 }
 
+
 /*----- Question part----- */
 h1{
   font-size: 2.7em;
   font-weight: normal;
-  text-decoration: underline;
+  text-decoration: none;
 }
 #main-part{
   position: absolute;
@@ -154,7 +149,6 @@ h1{
   width: 70%;
   text-align: center;
 }
-
 
 /*----- score part----- */
 #nav-bar{
@@ -165,6 +159,12 @@ h1{
   position: absolute;
   top: 50px;
   right: 150px;
+  color: #f6ffa5;
+}
+.result-info{
+  color: #f6ffa5;
+  font-size: 48px;
+  padding-top: 2rem;
 }
 #progress-section{
   display: flex;
@@ -177,10 +177,8 @@ h1{
   margin-top: -1rem;
 }
 
-
 /*----- hints part----- */
 a{
-
   color:#f6ffa5 ;
   font-size: 18px ;
   padding: 0.7rem;
@@ -190,7 +188,6 @@ a{
 a:hover {
   border-bottom:solid 3px #f6ffa5 ;
   color :#f6ffa5;
-  
 }
 
 #hints-section{

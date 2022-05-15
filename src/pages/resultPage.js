@@ -5,7 +5,7 @@ import { createResultAndScore } from "../views/resultView.js";
 import { quizData } from "../data.js";
 import { initWelcomePage } from "./welcomePage.js";
 
-export const resultPageFun = () => {
+export const showResultPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = "";
 
@@ -17,14 +17,12 @@ export const resultPageFun = () => {
 
   document
   .getElementById(START_QUIZ_BUTTON_ID)
-  .addEventListener("click", backToHomePageFunc);
+  .addEventListener("click", backToHomePage);
 
 };
 
-
-const backToHomePageFunc = () => {
+const backToHomePage = () => {
     localStorage.clear();
     location.reload();
     initWelcomePage();
   };
-  

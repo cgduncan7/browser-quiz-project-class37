@@ -3,15 +3,16 @@
 import {
   ANSWERS_LIST_ID,
   NEXT_QUESTION_BUTTON_ID,
-  USER_INTERFACE_ID, SCORE_DIV_ID, CORRECT_ANSWER_POINT, SHOW_RESULT_ID
+  SHOW_ANSWER_BUTTON_ID,
+  USER_INTERFACE_ID,
+  SCORE_DIV_ID,
+  CORRECT_ANSWER_POINT,
+  COUNTING_TIME_ID
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
-import { resultPageFun } from "./resultPage.js";
-import { COUNTING } from "../constants.js";
-
-
+import { showResultPage } from "./resultPage.js";
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
@@ -19,8 +20,6 @@ export const initQuestionPage = () => {
   const currentQuestion = getCurrentIndex();
 
   const questionElement = createQuestionElement(currentQuestion.text, quizData.score, quizData.timeCounter);
-
-
 
 
   userInterface.appendChild(questionElement);
@@ -46,6 +45,14 @@ export const initQuestionPage = () => {
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', nextQuestion);
+
+  if (quizData.currentQuestionIndex === quizData.questions.length - 1){
+    document.getElementById(NEXT_QUESTION_BUTTON_ID).innerHTML= "Show Result";
+    document
+    .getElementById(NEXT_QUESTION_BUTTON_ID)
+    .addEventListener("click", goToResult);
+  } 
+
   currentQuestion.links.map(links => {
     const hints = document.createElement("a");
     hints.innerHTML = links.text;
@@ -82,14 +89,35 @@ function chooseAnswer() {
 // increment
 const incrementScore = (point) => {
   quizData.score += point;
-  // for local storage
-  if (quizData.score) {
-    const allScore = quizData.score;
-    localStorage.setItem("score", allScore); // setItem(key, value)
-  }
-  document.getElementById(SCORE_DIV_ID).innerText = quizData.score;
+  document.getElementById(SCORE_DIV_ID).innerText = "SCORE: " + quizData.score;
+
+
 };
 
+export const countTime = () => {
+  // Add a Countdown for the quiz
+  const time = quizData.totalTime;
+  let maxQuizTimeSecs = 300;
+  let quizTimeInMinutes = time * 60 * 60;
+  let quizTime = quizTimeInMinutes / 60;
+
+  quizData.timer = setInterval(() => {
+    if (quizTime >= maxQuizTimeSecs) { 
+      clearInterval(quizData.timer);
+      quizData.timeCounter = `Time is up, Game Over!`;
+      document.getElementById(COUNTING_TIME_ID).innerText = quizData.timeCounter;
+      showResultPage();
+    } else {
+      quizTime++;
+      let sec = Math.floor(quizTime % 60);
+      sec = sec < 10 ? "0" + sec : sec;
+      let min = Math.floor(quizTime / 60) % 60;
+      min = min < 10 ? "0" + min : min;
+      quizData.timeCounter = `Your time is: ${min}:${sec}`;
+      document.getElementById(COUNTING_TIME_ID).innerText = quizData.timeCounter;
+    }
+  }, 1000);
+};
 
 // EventLister Function that executed to the next Question
 
@@ -103,6 +131,7 @@ const showAnswer = () => {
   const correctAnswer = getCorrect()
   correctAnswer.classList.add('show-correct-answer');
 }
+
 const getCurrentIndex = () => {
   return quizData.questions[quizData.currentQuestionIndex];
 }
@@ -118,4 +147,10 @@ const removeEventAll = () => {
     element.removeEventListener("click", chooseAnswer);
   });
 }
+
+// go to result page function
+const goToResult = () => {
+  clearInterval(quizData.timer);
+  showResultPage();
+};
 

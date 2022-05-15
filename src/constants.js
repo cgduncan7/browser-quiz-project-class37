@@ -20,5 +20,5 @@ export const SCORE_DIV_ID = "score-id";
 export let CORRECT_ANSWER_POINT = 10;
 
 // count-down
-export const COUNTING = "count-down";
 
+export const COUNTING_TIME_ID = "count-down";
