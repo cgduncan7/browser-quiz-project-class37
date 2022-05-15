@@ -22,7 +22,7 @@ export const createQuestionElement = (question, score, timeCounter) => {
     <section id="progress-section">
         <div><p id="progressText">Question : ${quizData.currentQuestionIndex + 1} / ${quizData.questions.length}</p></div>
     <div id="progressBar">
-      <div id="progressBarFull" style= "width:${progressBarFullStyle}"> 
+      <div id="progressBarFull" style= "width:${progressBarFullStyle}"><div>
     </div>
     </section>
     <div class="score-div">
@@ -46,13 +46,9 @@ export const createQuestionElement = (question, score, timeCounter) => {
   Next Question
 </button>
 
-    <button id="${SHOW_RESULT_ID}" class="result-btn">Result</button>
-
-
 <section id="hints-section">
   <h4>Need help? Check these hints</h4>
 </section>
-
   `;
 
   return element;
