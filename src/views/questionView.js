@@ -6,6 +6,7 @@ import {
 } from '../constants.js';
 import { quizData } from '../data.js';
 
+
 /**
  * Create a full question element
  * @returns {Element}
@@ -45,9 +46,13 @@ export const createQuestionElement = (question, score, timeCounter) => {
   Next Question
 </button>
 
+    <button id="${SHOW_RESULT_ID}" class="result-btn">Result</button>
+
+
 <section id="hints-section">
   <h4>Need help? Check these hints</h4>
 </section>
+
   `;
 
   return element;

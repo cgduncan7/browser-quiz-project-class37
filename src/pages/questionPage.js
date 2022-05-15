@@ -13,8 +13,6 @@ import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { showResultPage } from "./resultPage.js";
-
-
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
@@ -34,6 +32,7 @@ export const initQuestionPage = () => {
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
+
 
   document
     .getElementById(SHOW_ANSWER_BUTTON_ID)
@@ -60,7 +59,6 @@ export const initQuestionPage = () => {
     hints.href = links.href;
     document.getElementById("hints-section").appendChild(hints);
   })
-
 };
 
 function chooseAnswer() {
@@ -85,12 +83,15 @@ function chooseAnswer() {
     getCorrect();
   }
   removeEventAll()
+
 }
 
 // increment
 const incrementScore = (point) => {
   quizData.score += point;
   document.getElementById(SCORE_DIV_ID).innerText = "SCORE: " + quizData.score;
+
+
 };
 
 export const countTime = () => {
@@ -119,6 +120,7 @@ export const countTime = () => {
 };
 
 // EventLister Function that executed to the next Question
+
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   initQuestionPage();
@@ -151,3 +153,4 @@ const goToResult = () => {
   clearInterval(quizData.timer);
   showResultPage();
 };
+

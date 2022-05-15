@@ -1,10 +1,9 @@
 "use strict";
 
-import { USER_INTERFACE_ID, START_QUIZ_BUTTON_ID} from "../constants.js";
+import { USER_INTERFACE_ID, START_QUIZ_BUTTON_ID } from "../constants.js";
 import { createResultAndScore } from "../views/resultView.js";
 import { quizData } from "../data.js";
 import { initWelcomePage } from "./welcomePage.js";
-
 
 export const showResultPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -12,7 +11,7 @@ export const showResultPage = () => {
 
   const resultElement = createResultAndScore(
     quizData.score,
-    quizData.timeCounter,
+    quizData.timeCounter
   );
   userInterface.appendChild(resultElement);
 
@@ -27,5 +26,3 @@ const backToHomePage = () => {
     location.reload();
     initWelcomePage();
   };
-
-

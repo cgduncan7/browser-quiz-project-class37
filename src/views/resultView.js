@@ -2,7 +2,6 @@
 
 import { COUNTING_TIME_ID, SCORE_DIV_ID, START_QUIZ_BUTTON_ID } from "../constants.js";
 
-
 /**
  * Create a score and time of answer question element
  * @returns {Element}
