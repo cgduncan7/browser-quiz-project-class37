@@ -13,44 +13,37 @@ import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { showResultPage } from "./resultPage.js";
+
+
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
   const currentQuestion = getCurrentIndex();
-
   const questionElement = createQuestionElement(currentQuestion.text, quizData.score, quizData.timeCounter);
-
-
   userInterface.appendChild(questionElement);
-
   const answersListElement = document.getElementById(ANSWERS_LIST_ID);
+  const showAnswerButtonEl = document.getElementById(SHOW_ANSWER_BUTTON_ID);
+  const nextQuestionButtonEl =  document.getElementById(NEXT_QUESTION_BUTTON_ID);
 
   for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
-    const answerElement = createAnswerElement(key, answerText);
+    const answerElement = createAnswerElement(key,answerText);
     answerElement.setAttribute('data-key', key);
     answerElement.addEventListener('click', chooseAnswer);
     answersListElement.appendChild(answerElement);
   }
 
-
-  document
-    .getElementById(SHOW_ANSWER_BUTTON_ID)
-    .addEventListener('click', showAnswer);
-
-  document
-    .getElementById(SHOW_ANSWER_BUTTON_ID)
-    .addEventListener('click', removeEventAll);
+  showAnswerButtonEl.addEventListener('click', showAnswer);
+  showAnswerButtonEl.addEventListener('click', removeEventAll);
 
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', nextQuestion);
 
   if (quizData.currentQuestionIndex === quizData.questions.length - 1){
-    document.getElementById(NEXT_QUESTION_BUTTON_ID).innerHTML= "Show Result";
-    document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener("click", goToResult);
+    nextQuestionButtonEl.innerHTML= "Show Result";
+    nextQuestionButtonEl.removeEventListener("click", nextQuestion);
+    nextQuestionButtonEl.addEventListener("click", goToResult);
   } 
 
   currentQuestion.links.map(links => {
@@ -61,10 +54,11 @@ export const initQuestionPage = () => {
   })
 };
 
+
 function chooseAnswer() {
+  const showAnswerButtonEl = document.getElementById(SHOW_ANSWER_BUTTON_ID);
   const currentQuestion = getCurrentIndex();
   currentQuestion.selected = this.dataset.key
-
   const classApply =
     currentQuestion.selected === currentQuestion.correct
       ? 'correct'
@@ -74,13 +68,12 @@ function chooseAnswer() {
     incrementScore(CORRECT_ANSWER_POINT);
   }
 
-  if (currentQuestion.selected == currentQuestion.correct) {
+  if (currentQuestion.selected === currentQuestion.correct) {
     this.classList.add(classApply);
-    document.getElementById(SHOW_ANSWER_BUTTON_ID).removeEventListener('click', showAnswer);
+    showAnswerButtonEl.removeEventListener('click', showAnswer);
 
   } else {
     this.classList.add(classApply);
-    getCorrect();
   }
   removeEventAll()
 
@@ -90,9 +83,8 @@ function chooseAnswer() {
 const incrementScore = (point) => {
   quizData.score += point;
   document.getElementById(SCORE_DIV_ID).innerText = "SCORE: " + quizData.score;
-
-
 };
+
 
 export const countTime = () => {
   // Add a Countdown for the quiz
@@ -119,13 +111,13 @@ export const countTime = () => {
   }, 1000);
 };
 
+
 // EventLister Function that executed to the next Question
 
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   initQuestionPage();
 };
-
 
 const showAnswer = () => {
   const correctAnswer = getCorrect()
@@ -140,14 +132,12 @@ const getCorrect = () => {
   return document.querySelector(
     `li[data-key="${getCurrentIndex().correct}"]`);
 }
-
 const removeEventAll = () => {
-  const answerElements = document.querySelectorAll("li");
+  const answerElements = document.querySelectorAll("li[data-key]");
   answerElements.forEach((element) => {
     element.removeEventListener("click", chooseAnswer);
   });
 }
-
 // go to result page function
 const goToResult = () => {
   clearInterval(quizData.timer);
