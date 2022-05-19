@@ -14,8 +14,9 @@
 export const quizData = {
   currentQuestionIndex: 0,
   score: 0,
-  timeCounter:"" ,
+  timeCounter: "",
   totalTime: 0,
+  message: "",
   // the questions in the quiz
   questions: [
     {

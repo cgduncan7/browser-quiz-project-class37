@@ -21,7 +21,11 @@ body {
 .options-container:hover{
   cursor: pointer;
 }
+.options-container{
 
+  font-family: 'Courier New', Courier, monospace;
+
+}
 .correct {
   background-color: rgba(0,255,0,0.3);
 }
